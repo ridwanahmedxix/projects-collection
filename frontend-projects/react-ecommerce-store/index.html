@@ -1,1 +1,442 @@
-DO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shwapno – Online Grocery Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <span><i class="fa fa-truck"></i> Free delivery on orders above ৳499</span>
+      <span><i class="fa fa-headset"></i> Call: 16793</span>
+      <span><i class="fa fa-clock"></i> 7AM – 11PM Delivery</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <div class="logo-box">
+          <span class="logo-sw">sw</span><span class="logo-apno">apno</span>
+        </div>
+      </a>
+
+      <!-- Location -->
+      <div class="location-selector">
+        <i class="fa fa-map-marker-alt"></i>
+        <div class="loc-text">
+          <small>Deliver to</small>
+          <strong>Dhaka <i class="fa fa-chevron-down"></i></strong>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search for products..." id="searchInput" />
+        <button class="search-btn"><i class="fa fa-search"></i></button>
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+
+      <!-- Right Actions -->
+      <div class="header-actions">
+        <a href="#" class="action-btn">
+          <i class="fa fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="#" class="action-btn cart-btn">
+          <i class="fa fa-shopping-cart"></i>
+          <span>Cart</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- NAV CATEGORIES -->
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-leaf"></i> Fresh Food</a></li>
+        <li><a href="#"><i class="fa fa-apple-alt"></i> Fruits &amp; Veg</a></li>
+        <li><a href="#"><i class="fa fa-drumstick-bite"></i> Meat &amp; Fish</a></li>
+        <li><a href="#"><i class="fa fa-bread-slice"></i> Bakery</a></li>
+        <li><a href="#"><i class="fa fa-cookie"></i> Snacks</a></li>
+        <li><a href="#"><i class="fa fa-soap"></i> Cleaning</a></li>
+        <li><a href="#"><i class="fa fa-spa"></i> Beauty</a></li>
+        <li><a href="#"><i class="fa fa-baby"></i> Baby Care</a></li>
+        <li><a href="#" class="nav-offer"><i class="fa fa-fire"></i> Best Deals</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" style="background: linear-gradient(135deg, #e8f5e9 0%, #fff8e1 100%);">
+        <div class="hero-content">
+          <div class="hero-badge">UP TO</div>
+          <h1 class="hero-title">40% <span>OFF</span></h1>
+          <p>On selected grocery items</p>
+          <a href="#" class="hero-cta">Shop Now <i class="fa fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder eggs">🥚</div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);">
+        <div class="hero-content">
+          <div class="hero-badge">SPECIAL</div>
+          <h1 class="hero-title">20% <span>OFF</span></h1>
+          <p>Fresh vegetables daily</p>
+          <a href="#" class="hero-cta">Shop Now <i class="fa fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder veg">🥦</div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 100%);">
+        <div class="hero-content">
+          <div class="hero-badge">MEGA</div>
+          <h1 class="hero-title">30% <span>OFF</span></h1>
+          <p>Cooking oils &amp; essentials</p>
+          <a href="#" class="hero-cta">Shop Now <i class="fa fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder oil">🫒</div>
+        </div>
+      </div>
+    </div>
+    <button class="slide-btn prev" id="prevSlide"><i class="fa fa-chevron-left"></i></button>
+    <button class="slide-btn next" id="nextSlide"><i class="fa fa-chevron-right"></i></button>
+    <div class="slide-dots" id="slideDots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <!-- QUICK CATEGORIES -->
+  <section class="quick-cats">
+    <div class="container">
+      <div class="qcat-grid">
+        <a href="#" class="qcat-item"><div class="qcat-icon">🥬</div><span>Vegetables</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🍎</div><span>Fruits</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🥛</div><span>Dairy</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🍗</div><span>Chicken</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🐟</div><span>Fish</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🍜</div><span>Noodles</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🧴</div><span>Personal Care</span></a>
+        <a href="#" class="qcat-item"><div class="qcat-icon">🧹</div><span>Cleaning</span></a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content container">
+
+    <!-- RECOMMENDED FOR YOU -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Recommended For You</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="recommendedGrid">
+        <!-- JS populated -->
+      </div>
+    </section>
+
+    <!-- SUMMER FEST BANNER -->
+    <section class="promo-banner summer-fest">
+      <div class="promo-banner-inner">
+        <div class="promo-text">
+          <span class="promo-label">☀️ SUMMER FEST</span>
+          <h3>Beat the Heat with Refreshing Picks!</h3>
+          <a href="#" class="promo-btn">Shop Now</a>
+        </div>
+        <div class="promo-items">
+          <span class="promo-emoji">🍦</span>
+          <span class="promo-emoji">🧊</span>
+          <span class="promo-emoji">🥤</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMFORT FOR DAYS: SAVINGS FOR YOU -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Comfort For Days: Savings For You 🛒</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="comfortGrid"></div>
+    </section>
+
+    <!-- HOT & TRENDING -->
+    <section class="product-section trending-section">
+      <div class="section-header trending-header">
+        <h2 class="section-title">Hot &amp; Trending Right Now 🔥</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="trendingGrid"></div>
+    </section>
+
+    <!-- BEST DEALS BANNER -->
+    <section class="best-deals-banner">
+      <div class="best-deals-inner">
+        <div class="best-deals-label">
+          <span class="bd-star">⭐</span>
+          <span class="bd-text">BEST DEALS!</span>
+          <span class="bd-star">⭐</span>
+        </div>
+        <div class="best-deals-tagline">Unbeatable prices, every day!</div>
+      </div>
+    </section>
+
+    <!-- GROCERY WEEK -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Grocery Week</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="groceryWeekGrid"></div>
+    </section>
+
+    <!-- OFFERS GALORE BANNER -->
+    <section class="offers-strip">
+      <div class="offers-strip-inner">
+        <div class="offer-pill red">🎉 UP TO 40% OFF</div>
+        <div class="offer-pill green">🛒 Special Savings</div>
+        <div class="offer-pill orange">🔥 Big Sale</div>
+      </div>
+    </section>
+
+    <!-- EVERYDAY CLEANING ESSENTIALS -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Everyday Cleaning Essentials</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="cleaningGrid"></div>
+    </section>
+
+    <!-- SNACKS, NOODLES & MORE -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Snacks, Noodles &amp; More</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="snacksGrid"></div>
+    </section>
+
+    <!-- TRENDING THIS WEEK -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Trending This Week 📈</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="trendingWeekGrid"></div>
+    </section>
+
+    <!-- TODAY'S FEATURED PICKS DARK BANNER -->
+    <section class="featured-picks-banner">
+      <div class="featured-inner">
+        <h2>Today's Featured Picks</h2>
+        <p>Handpicked daily deals just for you</p>
+        <div class="featured-products-row" id="featuredRow"></div>
+      </div>
+    </section>
+
+    <!-- SPICE UP COOKING -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">🌶️ Spice Up Your Cooking Game</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="spiceGrid"></div>
+    </section>
+
+    <!-- SELF CARE -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">💆 Self-Care Starts Here</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="selfCareGrid"></div>
+    </section>
+
+    <!-- HAPPY HOURS BANNER -->
+    <section class="happy-hours-banner">
+      <div class="happy-hours-inner">
+        <div class="hh-badge">SPECIAL SAVINGS</div>
+        <h2>Happy Hours 🎉 <span class="hh-off">UP TO 40% OFF</span></h2>
+        <p>Limited time deals – grab them before they're gone!</p>
+        <div class="product-grid" id="happyHoursGrid"></div>
+      </div>
+    </section>
+
+    <!-- FRESH VEGETABLES -->
+    <section class="fresh-veg-section">
+      <div class="fresh-veg-banner">
+        <div class="fresh-veg-header">
+          <span class="fv-icon">🥬</span>
+          <h2>Fresh Vegetables</h2>
+          <span class="fv-icon">🍅</span>
+        </div>
+        <div class="fresh-veg-emoji-row">🥦 🥕 🥒 🌽 🥑 🍆 🧅 🫑</div>
+      </div>
+      <div class="product-grid" id="freshVegGrid"></div>
+    </section>
+
+    <!-- FRESH / STOCK UP BANNERS -->
+    <section class="double-banners">
+      <div class="db-left">
+        <div class="db-card fresh-card">
+          <div class="db-icon">🥩</div>
+          <h3>Fresh Meat</h3>
+          <p>Farm to table quality</p>
+          <a href="#" class="db-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="db-right">
+        <div class="db-card stock-card">
+          <div class="db-icon">📦</div>
+          <h3>Stock Up on Essentials</h3>
+          <p>Save more, buy more</p>
+          <a href="#" class="db-btn outline">Shop Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIABETIC CORNER -->
+    <section class="product-section">
+      <div class="section-header">
+        <h2 class="section-title">Diabetic Corner</h2>
+        <a href="#" class="see-all">See All <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="diabeticGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- BRAND LOGOS -->
+  <section class="brand-logos">
+    <div class="container">
+      <h3 class="brands-title">Top Brands</h3>
+      <div class="brand-row">
+        <div class="brand-item">ACI</div>
+        <div class="brand-item">PRAN</div>
+        <div class="brand-item">Unilever</div>
+        <div class="brand-item">BRAC</div>
+        <div class="brand-item">Square</div>
+        <div class="brand-item">Nestlé</div>
+        <div class="brand-item">Arong</div>
+        <div class="brand-item">Danish</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONTHLY GROCERY BANNER -->
+  <section class="monthly-banner">
+    <div class="container">
+      <div class="monthly-inner">
+        <div class="monthly-text">
+          <h2>Affordable Monthly Grocery Deals! 🛒</h2>
+          <p>Plan your month with unbeatable savings</p>
+          <a href="#" class="monthly-btn">Explore Deals</a>
+        </div>
+        <div class="monthly-img">🧺</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <span class="logo-sw">sw</span><span class="logo-apno">apno</span>
+          </div>
+          <p class="footer-desc">Bangladesh's most trusted online grocery shop. Fresh products delivered to your doorstep.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Stores</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>My Account</h4>
+          <ul>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Order History</a></li>
+            <li><a href="#">Wishlist</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Download App</h4>
+          <a href="#" class="app-badge">
+            <i class="fab fa-google-play"></i> Google Play
+          </a>
+          <a href="#" class="app-badge">
+            <i class="fab fa-apple"></i> App Store
+          </a>
+          <div class="exchange-info">
+            <small>Currency Exchange Available</small>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Shwapno. All rights reserved. | Always Here For You</p>
+        <div class="payment-icons">
+          <span>bKash</span>
+          <span>Nagad</span>
+          <span>Visa</span>
+          <span>MasterCard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART TOAST -->
+  <div class="cart-toast" id="cartToast">
+    <i class="fa fa-check-circle"></i> Added to cart!
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

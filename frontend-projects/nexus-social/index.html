@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Connect & Share</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen" class="loading-screen">
+  <div class="loader-wrap">
+    <div class="loader-logo">Nexus</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-left">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#" class="logo">Nexus</a>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" class="search-input" placeholder="Search Nexus…" id="searchInput" />
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <div class="nav-center">
+    <a href="#" class="nav-tab active" data-tab="home" title="Home">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+    <a href="#" class="nav-tab" data-tab="friends" title="Friends">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </a>
+    <a href="#" class="nav-tab" data-tab="messages" title="Messages">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+
+    <button class="nav-icon-btn notif-btn" id="notifBtn" title="Notifications">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="badge" id="notifBadge">3</span>
+    </button>
+
+    <div class="avatar-wrap" id="profileAvatarNav">
+      <img src="" alt="Profile" class="nav-avatar" id="navAvatar" />
+    </div>
+  </div>
+</nav>
+
+<!-- NOTIFICATION DROPDOWN -->
+<div class="notif-dropdown" id="notifDropdown">
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <button class="mark-all-read" id="markAllRead">Mark all read</button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
+<!-- ============ MAIN LAYOUT ============ -->
+<div class="main-layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar-left" id="sidebarLeft">
+    <div class="sidebar-profile-mini" id="sidebarProfileMini">
+      <img src="" alt="" class="sidebar-avatar" id="sidebarAvatar" />
+      <div>
+        <p class="sidebar-name" id="sidebarName">Loading…</p>
+        <p class="sidebar-bio" id="sidebarBio"></p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-view="home">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a href="#" class="sidebar-link" data-view="profile">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profile
+      </a>
+      <a href="#" class="sidebar-link" data-view="friends">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Friends
+      </a>
+      <a href="#" class="sidebar-link" data-view="messages">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messages
+      </a>
+      <a href="#" class="sidebar-link" data-view="saved">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        Saved
+      </a>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-section-title">Your shortcuts</p>
+      <a href="#" class="sidebar-link small">
+        <span class="shortcut-dot" style="background:#6366f1"></span> Photography
+      </a>
+      <a href="#" class="sidebar-link small">
+        <span class="shortcut-dot" style="background:#ec4899"></span> Design Talk
+      </a>
+      <a href="#" class="sidebar-link small">
+        <span class="shortcut-dot" style="background:#f59e0b"></span> Music Lovers
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============ FEED / CONTENT AREA ============ -->
+  <main class="feed-area" id="feedArea">
+
+    <!-- HOME VIEW -->
+    <div id="homeView" class="view active">
+
+      <!-- CREATE POST -->
+      <div class="create-post-card card">
+        <div class="create-post-top">
+          <img src="" alt="" class="create-avatar" id="createAvatar" />
+          <button class="create-post-input-btn" id="openPostModal">What's on your mind?</button>
+        </div>
+        <div class="create-post-actions">
+          <label class="create-action-btn" id="photoActionBtn">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photo / Video
+            <input type="file" id="quickPhotoInput" accept="image/*" hidden />
+          </label>
+          <button class="create-action-btn" id="feelingBtn">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            Feeling
+          </button>
+          <button class="create-action-btn" id="liveBtn">
+            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Live
+          </button>
+        </div>
+      </div>
+
+      <!-- STORIES ROW -->
+      <div class="stories-row" id="storiesRow">
+        <div class="story-card add-story">
+          <div class="story-img-wrap">
+            <img src="" alt="" id="storyUserImg" />
+            <div class="story-add-btn">+</div>
+          </div>
+          <span>Add Story</span>
+        </div>
+        <!-- Stories injected by JS -->
+      </div>
+
+      <!-- FEED POSTS -->
+      <div id="feedPosts"></div>
+
+    </div>
+
+    <!-- PROFILE VIEW -->
+    <div id="profileView" class="view">
+      <div class="profile-cover">
+        <div class="cover-img-wrap">
+          <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&q=80" alt="Cover" class="cover-img" id="coverImg" />
+          <button class="edit-cover-btn" id="editCoverBtn">
+            <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Edit Cover
+          </button>
+        </div>
+        <div class="profile-info-row">
+          <div class="profile-avatar-wrap">
+            <img src="" alt="Profile" class="profile-big-avatar" id="profileBigAvatar" />
+            <button class="edit-avatar-btn" id="editAvatarBtn" title="Change photo">
+              <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <input type="file" id="avatarInput" accept="image/*" hidden />
+          </div>
+          <div class="profile-meta">
+            <h1 class="profile-name" id="profileName">Your Name</h1>
+            <p class="profile-bio-text" id="profileBioText">Your bio here</p>
+            <div class="profile-stats">
+              <div class="stat"><span id="statPosts">0</span><small>Posts</small></div>
+              <div class="stat"><span id="statFriends">0</span><small>Friends</small></div>
+              <div class="stat"><span id="statLikes">0</span><small>Likes</small></div>
+            </div>
+          </div>
+          <button class="btn btn-primary edit-profile-btn" id="editProfileBtn">Edit Profile</button>
+        </div>
+      </div>
+
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-ptab="posts">Posts</button>
+        <button class="profile-tab" data-ptab="about">About</button>
+        <button class="profile-tab" data-ptab="friends">Friends</button>
+        <button class="profile-tab" data-ptab="photos">Photos</button>
+      </div>
+
+      <div class="profile-content">
+        <div id="ptab-posts" class="ptab-content active">
+          <div id="myPosts"></div>
+        </div>
+        <div id="ptab-about" class="ptab-content">
+          <div class="about-card card">
+            <h3>About</h3>
+            <div class="about-field"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="aboutName">—</span></div>
+            <div class="about-field"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="aboutLocation">—</span></div>
+            <div class="about-field"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span id="aboutWork">—</span></div>
+            <div class="about-field"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span id="aboutEmail">—</span></div>
+          </div>
+        </div>
+        <div id="ptab-friends" class="ptab-content">
+          <div class="friends-grid" id="profileFriendsList"></div>
+        </div>
+        <div id="ptab-photos" class="ptab-content">
+          <div class="photos-grid" id="photosGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIENDS VIEW -->
+    <div id="friendsView" class="view">
+      <div class="view-header">
+        <h2>Friends</h2>
+      </div>
+      <div class="friends-tabs">
+        <button class="ftab active" data-ftab="suggestions">Suggestions</button>
+        <button class="ftab" data-ftab="myFriends">My Friends</button>
+        <button class="ftab" data-ftab="requests">Requests</button>
+      </div>
+      <div id="ftab-suggestions" class="ftab-content active">
+        <div class="friends-grid" id="friendSuggestions"></div>
+      </div>
+      <div id="ftab-myFriends" class="ftab-content">
+        <div class="friends-grid" id="myFriendsList"></div>
+      </div>
+      <div id="ftab-requests" class="ftab-content">
+        <div class="friends-grid" id="friendRequests"></div>
+      </div>
+    </div>
+
+    <!-- MESSAGES VIEW -->
+    <div id="messagesView" class="view">
+      <div class="messages-layout">
+        <div class="messages-sidebar">
+          <div class="messages-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search messages…" id="msgSearch" />
+          </div>
+          <div class="conversations-list" id="conversationsList"></div>
+        </div>
+        <div class="chat-area" id="chatArea">
+          <div class="chat-empty">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p>Select a conversation to start chatting</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAVED VIEW -->
+    <div id="savedView" class="view">
+      <div class="view-header"><h2>Saved Items</h2></div>
+      <div id="savedPosts"></div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="sidebar-right" id="sidebarRight">
+
+    <!-- ONLINE FRIENDS -->
+    <div class="widget card">
+      <div class="widget-header">
+        <h4>Online Friends</h4>
+        <button class="widget-action">See all</button>
+      </div>
+      <div class="online-list" id="onlineList"></div>
+    </div>
+
+    <!-- FRIEND SUGGESTIONS -->
+    <div class="widget card">
+      <div class="widget-header">
+        <h4>People You May Know</h4>
+        <button class="widget-action">See all</button>
+      </div>
+      <div class="suggestions-list" id="suggestionsList"></div>
+    </div>
+
+    <!-- TRENDING -->
+    <div class="widget card">
+      <div class="widget-header">
+        <h4>Trending</h4>
+      </div>
+      <div class="trending-list" id="trendingList"></div>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- Create Post Modal -->
+<div class="modal-overlay" id="postModalOverlay">
+  <div class="modal post-modal">
+    <div class="modal-header">
+      <h3>Create Post</h3>
+      <button class="modal-close" data-close="postModalOverlay">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-user-row">
+        <img src="" alt="" class="modal-avatar" id="modalAvatar" />
+        <div>
+          <p class="modal-username" id="modalUsername">You</p>
+          <select class="privacy-select" id="privacySelect">
+            <option value="public">🌍 Public</option>
+            <option value="friends">👥 Friends</option>
+            <option value="only-me">🔒 Only Me</option>
+          </select>
+        </div>
+      </div>
+      <textarea class="post-textarea" id="postText" placeholder="What's on your mind?" rows="4"></textarea>
+      <div class="feeling-tags" id="feelingTags"></div>
+      <div class="image-preview-wrap" id="imagePreviewWrap" style="display:none">
+        <img src="" alt="preview" class="image-preview" id="imagePreview" />
+        <button class="remove-img-btn" id="removeImg">✕</button>
+      </div>
+      <div class="post-modal-actions">
+        <span class="add-to-post-label">Add to your post:</span>
+        <label class="action-icon-btn" title="Photo">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <input type="file" id="postImageInput" accept="image/*" hidden />
+        </label>
+        <button class="action-icon-btn feeling-trigger" title="Feeling" id="feelingTrigger">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </button>
+        <button class="action-icon-btn" title="Location">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </button>
+      </div>
+      <div class="feeling-picker" id="feelingPicker" style="display:none">
+        <button class="feeling-item" data-feeling="😊 Happy">😊 Happy</button>
+        <button class="feeling-item" data-feeling="😍 Loved">😍 Loved</button>
+        <button class="feeling-item" data-feeling="😢 Sad">😢 Sad</button>
+        <button class="feeling-item" data-feeling="😂 Funny">😂 Funny</button>
+        <button class="feeling-item" data-feeling="😎 Cool">😎 Cool</button>
+        <button class="feeling-item" data-feeling="🤔 Thoughtful">🤔 Thoughtful</button>
+        <button class="feeling-item" data-feeling="🎉 Excited">🎉 Excited</button>
+        <button class="feeling-item" data-feeling="😴 Tired">😴 Tired</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-full" id="submitPost">Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay" id="editProfileOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Edit Profile</h3>
+      <button class="modal-close" data-close="editProfileOverlay">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" class="form-input" id="editName" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Bio</label>
+        <input type="text" class="form-input" id="editBio" placeholder="Short bio" />
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" class="form-input" id="editLocation" placeholder="Where are you?" />
+      </div>
+      <div class="form-group">
+        <label>Work</label>
+        <input type="text" class="form-input" id="editWork" placeholder="Where do you work?" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-input" id="editEmail" placeholder="your@email.com" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close="editProfileOverlay">Cancel</button>
+      <button class="btn btn-primary" id="saveProfile">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Image Full View -->
+<div class="modal-overlay" id="imageViewOverlay">
+  <div class="image-view-modal">
+    <button class="modal-close image-view-close" data-close="imageViewOverlay">✕</button>
+    <img src="" alt="" class="full-image" id="fullImageView" />
+  </div>
+</div>
+
+<!-- Chat Box (floating) -->
+<div class="chat-box" id="floatingChatBox" style="display:none">
+  <div class="chat-box-header" id="chatBoxHeader">
+    <div class="chat-box-user">
+      <img src="" alt="" class="chat-box-avatar" id="chatBoxAvatar" />
+      <span id="chatBoxName">Name</span>
+    </div>
+    <button class="chat-box-close" id="chatBoxClose">✕</button>
+  </div>
+  <div class="chat-box-messages" id="chatBoxMessages"></div>
+  <div class="chat-box-input-row">
+    <input type="text" class="chat-box-input" id="chatBoxInput" placeholder="Type a message…" />
+    <button class="chat-send-btn" id="chatSendBtn">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

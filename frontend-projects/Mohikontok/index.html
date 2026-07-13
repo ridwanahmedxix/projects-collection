@@ -109,7 +109,72 @@
     <!-- =========================================================
        SECTION 1 - 1st Para
   ========================================================== -->
-    <main id="top" class="demo-page"></main>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <!-- Decorative background texture (acoustic-foam nod) + glow, purely visual -->
+        <div class="hero-texture" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <div class="hero-container">
+          <!-- ================= Left: Content ================= -->
+          <div class="hero-content">
+            <p class="hero-eyebrow">Studio A · Now Booking 2026</p>
+
+            <h1 class="hero-title" id="hero-title">
+              Where tracks get their
+              <span class="hero-title-accent">teeth.</span>
+            </h1>
+
+            <p class="hero-copy">
+              A 900&nbsp;sq&nbsp;ft live room, a vintage SSL console, and forty
+              years of outboard gear — built for artists who record like it's
+              the only take they'll get.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#book-lab" class="hero-btn hero-btn-primary">
+                <span>Book the Lab</span>
+              </a>
+              <a href="#reel" class="hero-btn hero-btn-secondary">
+                <span>Hear the Room</span>
+              </a>
+            </div>
+
+            <ul class="hero-gear" aria-label="Studio equipment">
+              <li class="hero-gear-item">SSL 4000&nbsp;G+</li>
+              <li class="hero-gear-item">Neumann U87</li>
+              <li class="hero-gear-item">Dolby Atmos Suite</li>
+            </ul>
+          </div>
+
+          <!-- ================= Right: Signature visual ================= -->
+          <div class="hero-visual">
+            <div class="hero-visual-panel">
+              <div class="hero-visual-head">
+                <span class="hero-visual-label">Input Monitor</span>
+                <span class="hero-live" aria-hidden="true">
+                  <span class="hero-live-dot"></span>
+                  Live
+                </span>
+              </div>
+
+              <div
+                class="hero-spectrum"
+                id="heroSpectrum"
+                role="img"
+                aria-label="Animated audio spectrum visualizer"
+              ></div>
+
+              <div class="hero-readout">
+                <span class="hero-readout-item">-14 LUFS</span>
+                <span class="hero-readout-item">96kHz / 24-bit</span>
+                <span class="hero-readout-item">CH 1–16</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <script src="script.js"></script>
   </body>

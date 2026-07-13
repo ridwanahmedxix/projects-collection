@@ -112,4 +112,70 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll(); // set initial state on load
+
+  /* -----------------------------------------------------------
+     3. Smooth-anchor scroll (replaces CSS scroll-behavior: smooth
+        so wheel/touch scroll stays native & jitter-free)
+  ----------------------------------------------------------- */
+  document.addEventListener("click", (event) => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor) return;
+    const id = anchor.getAttribute("href");
+    if (!id || id === "#") return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", id);
+  });
+})();
+
+/* =============================================================
+   HERO SECTION SCRIPT — mOHiKOnTOk Sound Lab
+   Vanilla JS, scoped entirely to .hero. No globals, no
+   dependencies, never touches other sections.
+   ============================================================= */
+
+(() => {
+  "use strict";
+
+  const section = document.querySelector(".hero");
+  if (!section) return;
+
+  const spectrum = section.querySelector("#heroSpectrum");
+  if (!spectrum) return;
+
+  const BAR_COUNT = 28;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < BAR_COUNT; i += 1) {
+    const bar = document.createElement("span");
+    bar.className = "hero-spectrum-bar";
+
+    // Randomized, organic min/max scale + timing per bar so the
+    // spectrum reads as a live signal rather than a looping GIF.
+    const min = (0.15 + Math.random() * 0.25).toFixed(2);
+    const max = (0.55 + Math.random() * 0.45).toFixed(2);
+    const duration = (0.9 + Math.random() * 1.1).toFixed(2);
+    const delay = (Math.random() * -2).toFixed(2);
+
+    bar.style.setProperty("--hero-bar-min", min);
+    bar.style.setProperty("--hero-bar-max", max);
+
+    if (!prefersReducedMotion) {
+      bar.style.animationDuration = `${duration}s`;
+      bar.style.animationDelay = `${delay}s`;
+    } else {
+      // Static, single-height bars when motion is reduced.
+      bar.style.transform = `scaleY(${max})`;
+    }
+
+    fragment.appendChild(bar);
+  }
+
+  spectrum.appendChild(fragment);
 })();

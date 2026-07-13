@@ -1,0 +1,625 @@
+/* =============================================================
+   mOHiKOnTOk SOUND LAB — NAVBAR STYLESHEET
+   Palette: near-black / off-white / dove-gray + brass accent
+   (brass nods to analog studio hardware — VU needles, knobs)
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   0. Design Tokens
+------------------------------------------------------------- */
+:root {
+  /* Core monochrome palette */
+  --c-black: #0a0a0b;
+  --c-panel: #141416;
+  --c-glass: rgba(15, 15, 17, 0.66);
+  --c-border: rgba(245, 245, 244, 0.09);
+  --c-border-strong: rgba(245, 245, 244, 0.18);
+  --c-white: #f5f5f4;
+  --c-gray-300: #c7c7ca;
+  --c-gray-500: #9a9a9e;
+  --c-gray-700: #616166;
+
+  /* Accent — brass / VU-meter amber, used ONLY for hover + CTA + rec light */
+  --c-accent: #c9a24b;
+  --c-accent-soft: rgba(201, 162, 75, 0.16);
+  --c-accent-line: rgba(201, 162, 75, 0.55);
+
+  /* Type */
+  --font-display: "Outfit", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Layout */
+  --header-max-w: 1360px;
+  --header-pad-x: clamp(20px, 4vw, 48px);
+  --header-h: 84px;
+  --header-h-scrolled: 64px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-med: 320ms;
+  --dur-slow: 480ms;
+}
+
+/* -------------------------------------------------------------
+   1. Reset & Base
+------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Locks body scroll while the mobile drawer is open (JS toggles this) */
+body.nav-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
+
+/* Visible focus state for keyboard navigation (accessibility) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* -------------------------------------------------------------
+   2. Site Header — sticky glass shell
+------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 14px clamp(12px, 2.5vw, 28px) 0;
+  transition: padding var(--dur-med) var(--ease-premium);
+}
+
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: var(--header-max-w);
+  height: var(--header-h);
+  margin: 0 auto;
+  padding: 0 var(--header-pad-x);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 20px 40px -28px rgba(0, 0, 0, 0.6);
+  transition:
+    height var(--dur-med) var(--ease-premium),
+    box-shadow var(--dur-med) var(--ease-premium),
+    background var(--dur-med) var(--ease-premium),
+    border-color var(--dur-med) var(--ease-premium);
+}
+
+/* Shrink + deepen shadow once the page has scrolled (JS sets [data-scrolled="true"]) */
+.site-header[data-scrolled="true"] .header-container {
+  height: var(--header-h-scrolled);
+  background: rgba(10, 10, 11, 0.82);
+  border-color: var(--c-border-strong);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 48px -20px rgba(0, 0, 0, 0.75);
+}
+
+/* -------------------------------------------------------------
+   3. Brand / Logo
+------------------------------------------------------------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 6px 4px;
+  border-radius: var(--radius-sm);
+}
+
+.brand-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid var(--c-border-strong);
+  background: linear-gradient(180deg, #17171a 0%, #0d0d0f 100%);
+  transition: border-color var(--dur-med) var(--ease-premium);
+}
+
+.brand:hover .brand-mark,
+.brand:focus-visible .brand-mark {
+  border-color: var(--c-accent-line);
+}
+
+/* Tiny "on-air" indicator — signature nod to a studio record light */
+.rec-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 6px 1px var(--c-accent-line);
+  animation: rec-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes rec-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Idle equalizer bars — subtle looping animation, echoes the sound lab */
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.eq-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--c-gray-300);
+  animation: eq-pulse 1.6s ease-in-out infinite;
+  transition: background var(--dur-med) var(--ease-premium);
+}
+
+.eq-bar:nth-child(1) {
+  height: 40%;
+  animation-delay: -1.1s;
+}
+.eq-bar:nth-child(2) {
+  height: 90%;
+  animation-delay: -0.4s;
+}
+.eq-bar:nth-child(3) {
+  height: 60%;
+  animation-delay: -0.9s;
+}
+.eq-bar:nth-child(4) {
+  height: 75%;
+  animation-delay: -0.2s;
+}
+
+.brand:hover .eq-bar,
+.brand:focus-visible .eq-bar {
+  background: var(--c-accent);
+}
+
+@keyframes eq-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--c-white);
+  white-space: nowrap;
+}
+
+.brand-tag {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gray-500);
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------
+   4. Primary Navigation (Center) — desktop
+------------------------------------------------------------- */
+.primary-nav {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1.4vw, 10px);
+}
+
+.nav-item-cta {
+  display: none; /* the mobile-only CTA copy stays hidden on desktop */
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--c-gray-300);
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) var(--ease-premium);
+}
+
+/* Signature hover: a center-anchored "VU peak" line that grows outward,
+   paired with a soft label rise. One deliberate animation, used everywhere. */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: var(--c-accent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width var(--dur-med) var(--ease-premium);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.is-active {
+  color: var(--c-white);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: calc(100% - 20px);
+}
+
+.nav-link.is-active::after {
+  width: calc(100% - 20px);
+  background: var(--c-accent);
+}
+
+.nav-link.is-active {
+  color: var(--c-white);
+}
+
+/* -------------------------------------------------------------
+   5. Actions — CTA + Hamburger toggle
+------------------------------------------------------------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.btn-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 24px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--c-black);
+  background: var(--c-white);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color var(--dur-fast) var(--ease-premium),
+    box-shadow var(--dur-med) var(--ease-premium),
+    transform var(--dur-fast) var(--ease-premium);
+}
+
+.btn-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-accent);
+  transform: translateY(100%);
+  transition: transform var(--dur-med) var(--ease-premium);
+}
+
+.btn-cta:hover,
+.btn-cta:focus-visible {
+  color: var(--c-black);
+  box-shadow: 0 10px 28px -10px var(--c-accent-line);
+  transform: translateY(-1px);
+}
+
+.btn-cta:hover::before,
+.btn-cta:focus-visible::before {
+  transform: translateY(0);
+}
+
+.btn-cta:active {
+  transform: translateY(0);
+}
+
+.btn-cta-mobile {
+  display: none;
+}
+
+/* Custom animated hamburger */
+.nav-toggle {
+  display: none; /* shown only in the mobile breakpoint */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border-strong);
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+.toggle-bar {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-white);
+  transition:
+    transform var(--dur-med) var(--ease-premium),
+    opacity var(--dur-fast) var(--ease-premium),
+    width var(--dur-fast) var(--ease-premium);
+}
+
+.nav-toggle:hover .toggle-bar {
+  background: var(--c-accent);
+}
+
+/* Hamburger -> X morph, driven by [aria-expanded] */
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-overlay {
+  display: none;
+}
+
+/* =============================================================
+   6. MOBILE / TABLET LAYOUT  (≤ 1150px)
+   ============================================================= */
+@media (max-width: 1150px) {
+  .header-container {
+    padding: 0 clamp(14px, 3.5vw, 22px);
+  }
+
+  .btn-cta-desktop {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* Backdrop behind the drawer */
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 6, 7, 0.55);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-med) var(--ease-premium);
+    z-index: 998;
+  }
+
+  .nav-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Drawer panel */
+  .primary-nav {
+    position: fixed;
+    top: calc(var(--header-h) + 22px);
+    right: clamp(12px, 3.5vw, 28px);
+    left: clamp(12px, 3.5vw, 28px);
+    z-index: 999;
+    max-width: 420px;
+    margin-left: auto;
+    justify-content: flex-start;
+
+    max-height: min(72vh, 560px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-lg);
+    background: rgba(12, 12, 14, 0.92);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+
+    /* Fade + slide, hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.98);
+    transform-origin: top right;
+    transition:
+      opacity var(--dur-med) var(--ease-premium),
+      transform var(--dur-med) var(--ease-premium),
+      visibility 0s linear var(--dur-med);
+  }
+
+  .site-header[data-scrolled="true"] .primary-nav {
+    top: calc(var(--header-h-scrolled) + 18px);
+  }
+
+  .primary-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition:
+      opacity var(--dur-med) var(--ease-premium),
+      transform var(--dur-med) var(--ease-premium),
+      visibility 0s linear;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 14px;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 15.5px;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-link::after {
+    /* swap the underline for a left accent bar on mobile rows */
+    left: 0;
+    bottom: 0;
+    top: 0;
+    height: auto;
+    width: 2px;
+    border-radius: 2px 0 0 2px;
+    transform: none;
+    transition: opacity var(--dur-fast) var(--ease-premium);
+    opacity: 0;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    width: 2px;
+    opacity: 1;
+  }
+
+  .nav-item-cta {
+    display: block;
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--c-border);
+  }
+
+  .btn-cta-mobile {
+    display: flex;
+    width: 100%;
+    padding: 14px 16px;
+  }
+}
+
+/* Small phones: tighten spacing further, guard against overflow */
+@media (max-width: 380px) {
+  .brand-name {
+    font-size: 15.5px;
+  }
+  .brand-tag {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+  }
+  .header-container {
+    gap: 10px;
+  }
+  .primary-nav {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================================
+    SECTION 1 - 1st Para
+   ============================================================= */

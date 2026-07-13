@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mOHiKOnTOk Sound Lab — Navbar</title>
+    <meta
+      name="description"
+      content="Premium recording studio &amp; music production house."
+    />
+
+    <!-- Google Fonts: Outfit (display/nav) + JetBrains Mono (technical/utility accents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- =========================================================
+       SITE HEADER / NAVBAR
+       Sticky, glassmorphic, shrinks on scroll.
+  ========================================================== -->
+    <header class="site-header" id="siteHeader" data-scrolled="false">
+      <div class="header-container">
+        <!-- ===== Brand / Logo (Left) ===== -->
+        <a href="#top" class="brand" aria-label="mOHiKOnTOk Sound Lab — Home">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="rec-dot"></span>
+            <span class="eq-bars">
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+            </span>
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">mOHiKOnTOk</span>
+            <span class="brand-tag">Sound&nbsp;Lab</span>
+          </span>
+        </a>
+
+        <!-- ===== Overlay (mobile menu backdrop) ===== -->
+        <div class="nav-overlay" id="navOverlay" hidden></div>
+
+        <!-- ===== Primary Navigation (Center) ===== -->
+        <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+          <ul class="nav-list" id="navList">
+            <li class="nav-item">
+              <a class="nav-link" href="#about" data-nav-link>About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#studio-space" data-nav-link
+                >Studio Space</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services" data-nav-link
+                >Services &amp; Rates</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#portfolio" data-nav-link>Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#blog" data-nav-link>Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#book-now" data-nav-link>Book Now</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sign-in" data-nav-link>Sign In</a>
+            </li>
+
+            <!-- CTA duplicated inside the drawer for easy mobile reach -->
+            <li class="nav-item nav-item-cta">
+              <a href="#book-lab" class="btn-cta btn-cta-mobile" data-nav-link>
+                <span>Book Lab</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- ===== Actions (Right): CTA + Hamburger ===== -->
+        <div class="header-actions">
+          <a href="#book-lab" class="btn-cta btn-cta-desktop">
+            <span>Book Lab</span>
+          </a>
+
+          <button
+            type="button"
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="primaryNav"
+          >
+            <span class="toggle-bar"></span>
+            <span class="toggle-bar"></span>
+            <span class="toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================
+       SECTION 1 - 1st Para
+  ========================================================== -->
+    <main id="top" class="demo-page"></main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
